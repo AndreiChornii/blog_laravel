@@ -28,7 +28,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        return view('blog.create');
     }
 
     /**
@@ -39,7 +39,15 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|string'
+        ]);
+
+        $blog = new Blog();
+        $blog->name = $request->get('title');
+        $blog->save();
+
+        return (redirect(route('blogs.list')));
     }
 
     /**

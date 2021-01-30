@@ -24,6 +24,8 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::get('blogs',[\App\Http\Controllers\BlogController::class, 'index'])->name('blogs.list');
+Route::get('blogs/create',[\App\Http\Controllers\BlogController::class, 'create'])->name('blogs.create');
+Route::post('/blog/store', [\App\Http\Controllers\BlogController::class, 'store'])->name('blogs.store');
 Route::get('/posts/{blog}', [\App\Http\Controllers\PostController::class,'index'])->name('blog_posts.list');
 Route::get('/post/{blog}/create', [\App\Http\Controllers\PostController::class,'create'])->name('create.post');
 Route::post('/post/{blog}', [\App\Http\Controllers\PostController::class, 'store'])->name('posts.store');

@@ -133,10 +133,14 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/blog" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/blog" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/views/posts" />
     </key>
@@ -157,7 +161,7 @@
       <updated>1611564792957</updated>
       <workItem from="1611564794119" duration="12768000" />
       <workItem from="1611706679452" duration="8751000" />
-      <workItem from="1611794285854" duration="8852000" />
+      <workItem from="1611794285854" duration="13671000" />
     </task>
     <servers />
   </component>
