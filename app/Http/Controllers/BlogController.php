@@ -58,18 +58,31 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function edit(Blog $blog)
+    public function edit(Request $request, Blog $blog)
     {
-        //
+//        dd($request->get('id'));
+//        dd($request->get('name'));
+//        $id = $request->get('id');
+//        $name = $request->get('name');
+//        $blog = compact('id', 'name');
+//        $blog_send['blog'] = $blog;
+//        dd($blog_send);
+
+        $blog_send = new Blog();
+        $blog_send->id = $request->get('id');
+        $blog_send->name = $request->get('name');
+//        dd($blog_send);
+        return view('blog.edit', ['blog' => $blog_send]);
     }
 
     /**
@@ -81,17 +94,44 @@ class BlogController extends Controller
      */
     public function update(Request $request, Blog $blog)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|string'
+        ]);
+
+//        dd($request->get('title'));
+//        dd($request->get('id'));
+
+//        $blog_new = new Blog();
+//        $blog_new->name = $request->get('title');
+//        dd($blog_new);
+        //        $blog->save();
+
+        $blog = Blog::find($request->get('id'));
+        $blog->name = $request->get('title');
+        $blog->save();
+//        $this->validate($request, [
+//            'title' => 'required|string'
+//        ]);
+//
+//        $blog_new = new Blog();
+//        $blog_new->name = $request->get('title');
+//        $blog
+//
+        return (redirect(route('blogs.list')));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Blog $blog
+     * @return void
      */
-    public function destroy(Blog $blog)
+    public function destroy(Request $request, Blog $blog)
     {
-        //
+        $blog = Blog::find($request->get('id'));
+        $blog->delete();
+
+        return redirect(route('blogs.list'));
     }
 }

@@ -14,9 +14,16 @@
                             <li><a href="{{route('posts.show', ['post' => $post->id])}}">{{$post->title}}</li>
                         @endforeach
                     </ul>
-
-
                 </div>
+                <form method="GET" action="{{ route('create.post', ['blog' => $blog->id]) }}">
+                    @csrf
+                    <div class="flex items-center justify-begin mt-4">
+
+                        <x-button class="ml-3">
+                            {{ __('Create post') }}
+                        </x-button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
