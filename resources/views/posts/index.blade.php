@@ -11,7 +11,31 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <ul class="list-disc">
                         @foreach($posts as $post)
-                            <li><a href="{{route('posts.show', ['post' => $post->id])}}">{{$post->title}}</li>
+                            <li>
+                                <a href="{{route('posts.show', ['post' => $post->id])}}">{{$post->title}}
+                                <form method="post" action="{{ route('posts.edit', ['post' => $post->id]) }}">
+                                    <input type="hidden" name="id" value="{{$post->id}}">
+                                    <input type="hidden" name="title" value="{{$post->title}}">
+                                    <input type="hidden" name="content" value="{{$post->content}}">
+                                    @csrf
+                                    <div class="flex items-center justify-begin mt-4">
+
+                                        <x-button class="ml-3">
+                                            {{ __('update post') }}
+                                        </x-button>
+                                    </div>
+                                </form>
+                                <form method="post" action="{{ route('post.delete', ['post' => $post->id]) }}">
+                                    <input type="hidden" name="id" value="{{$post->id}}">
+                                    @csrf
+                                    <div class="flex items-center justify-begin mt-4">
+
+                                        <x-button class="ml-3">
+                                            {{ __('delete post') }}
+                                        </x-button>
+                                    </div>
+                                </form>
+                            </li>
                         @endforeach
                     </ul>
                 </div>

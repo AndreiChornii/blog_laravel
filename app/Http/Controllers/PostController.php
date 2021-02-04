@@ -83,12 +83,19 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Models\Post $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Request $request, Post $post)
     {
-        //
+//        dd($request);
+        $post_send = new Post();
+        $post_send->id = $request->get('id');
+        $post_send->title = $request->get('title');
+        $post_send->content = $request->get('content');
+
+        return view('posts.edit', ['post' => $post_send]);
     }
 
     /**
@@ -100,17 +107,35 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+//        dd($request);
+        $this->validate($request, [
+            'title' => 'required|string',
+            'content' => 'required|string'
+        ]);
+
+        $post = Post::find($request->get('id'));
+//        dd($post);
+//        dd($post->blog_id);
+        $post->title = $request->get('title');
+        $post->content = $request->get('content');
+//        $post->blog_id = $request->get('blog_id');
+        $post->save();
+
+        return redirect(route('blog_posts.list', ['blog' => $post->blog_id]));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Post $post
+     * @return void
      */
-    public function destroy(Post $post)
+    public function destroy(Request $request, Post $post)
     {
-        //
+        $post = Post::find($request->get('id'));
+        $post->delete();
+
+        return redirect(route('blog_posts.list', ['blog' => $post->blog_id]));
     }
 }
